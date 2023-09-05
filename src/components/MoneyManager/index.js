@@ -62,6 +62,17 @@ class MoneyManager extends Component {
     }))
   }
 
+  deleteTheItem = id => {
+    const {newTransactionHistory} = this.state
+    this.setState(prevState => ({
+      newTransactionHistory: [
+        ...prevState.newTransactionHistory.filter(
+          eachTransaction => eachTransaction.id !== id,
+        ),
+      ],
+    }))
+  }
+
   render() {
     const {
       newTransactionHistory,
@@ -78,7 +89,7 @@ class MoneyManager extends Component {
           <h1>Hi Richard</h1>
           <p>Welcome back to your Money Manager</p>
         </div>
-        <MoneyDetails balance={(income, expenses)} />
+        <MoneyDetails balance={{income, expenses}} />
 
         <div>
           <form>
@@ -99,7 +110,9 @@ class MoneyManager extends Component {
             />
             <select onChange={this.onChangeInputType} value={type}>
               {transactionTypeOptions.map(eachItem => (
-                <option key={eachItem.optionId}>{eachItem.displayText}</option>
+                <option key="optionId" value={eachItem.displayText}>
+                  {eachItem.displayText}
+                </option>
               ))}
             </select>
             <button type="submit" onClick={this.addTransactionItem}>
@@ -115,7 +128,11 @@ class MoneyManager extends Component {
               <p>Type</p>
 
               {newTransactionHistory.map(eachItem => (
-                <TransactionItem eachItem={eachItem} key={eachItem.id} />
+                <TransactionItem
+                  eachItem={eachItem}
+                  key={eachItem.id}
+                  deleteTheItem={this.deleteTheItem}
+                />
               ))}
             </ul>
           </div>

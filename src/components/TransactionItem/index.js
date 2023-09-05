@@ -9,7 +9,7 @@ const TransactionItem = props => {
   return (
     <li className="list-item">
       <p>{title}</p>
-      <p>{amount}</p>
+      <p>Rs {amount}</p>
       <p>{type}</p>
       <img
         src="https://assets.ccbp.in/frontend/react-js/money-manager/delete.png"
